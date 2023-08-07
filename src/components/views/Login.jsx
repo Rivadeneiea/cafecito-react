@@ -1,5 +1,6 @@
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { login } from "../helpers/queries";
 
 const Login = () => {
   const {
@@ -11,6 +12,7 @@ const Login = () => {
   const onSubmit = (usuario) => {
     console.log("aca agrego logica");
     console.log(usuario);
+    login(usuario);
   };
 
   return (
