@@ -1,12 +1,12 @@
 // la funsion por parametro usuario con mail y password
 export const login = async (usuario) => {
   try {
-    const promesa = await fetch("json-server --watch db.json --port 3004");
-    const listaUsuarios = await respuesta.json();
+    const promesa = await fetch("http://localhost:3004/usuarios");
+    const listaUsuarios = await promesa.json();
     // pedir lista de usuarios a json server
     // buscar usuario que complete el formulario
     const usuarioBuscado = listaUsuarios.find(
-      (itemUsuario) => itemUsuario.email === usuario.mail
+      (itemUsuario) => itemUsuario.email === usuario.email
     );
     // preguntar si encontro el usuario
     if (usuarioBuscado) {

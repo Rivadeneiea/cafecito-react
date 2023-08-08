@@ -1,7 +1,8 @@
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { login } from "../helpers/queries";
-
+import Swal from "sweetalert2";
+Swal;
 const Login = () => {
   const {
     register,
@@ -12,7 +13,21 @@ const Login = () => {
   const onSubmit = (usuario) => {
     console.log("aca agrego logica");
     console.log(usuario);
-    login(usuario);
+    login(usuario).then((respuesta) => {
+      console.log(respuesta);
+      if (respuesta) {
+        Swal.fire(
+          "bienvenido" + respuesta.usuario,
+          "ingresaste a la web",
+          "success"
+        );
+      } else {
+        Swal.fire("ocurrio un error", "email o password incorrecto", "error");
+      }
+    });
+    // console.log(usuario);
+    // let respuesta = login(usuario);
+    // console.log(respuesta);
   };
 
   return (
@@ -47,12 +62,11 @@ const Login = () => {
                 type="password"
                 placeholder="Password"
                 {...register("password", {
-                  required: "el password es un dato obligatorio",
+                  required: "El password es un dato obligatorio",
                   pattern: {
-                    value: /^(?=\w*\d)(?=\w*[A-Z])(?=\w\*[a-z])\S{8,16}$/,
-
+                    value: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
                     message:
-                      "El password debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.",
+                      "el password debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.",
                   },
                 })}
               />
