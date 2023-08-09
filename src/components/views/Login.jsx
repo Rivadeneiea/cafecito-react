@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { login } from "../helpers/queries";
 import Swal from "sweetalert2";
 Swal;
-const Login = () => {
+const Login = ({ setUsuarioActivo }) => {
   const {
     register,
     handleSubmit,
@@ -23,6 +23,7 @@ const Login = () => {
         );
         // guardar en el localstorage o seccionStorage
         sessionStorage.setItem("usuarioLogeado", JSON.stringify(respuesta));
+        setUsuarioActivo(respuesta);
       } else {
         Swal.fire("ocurrio un error", "email o password incorrecto", "error");
       }
