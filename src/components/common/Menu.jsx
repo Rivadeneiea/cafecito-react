@@ -1,7 +1,14 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { NavLink, Link } from "react-router-dom";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
-const Menu = () => {
+const Menu = ({ usuarioActivo, setUsuarioActivo }) => {
+  const navegacion = useNavigate();
+  // limpiamos el estado y el sessionStorage
+  const logout = () => {
+    setUsuarioActivo({});
+    sessionStorage.removeItem("usuarioLogeado");
+    navegacion("/");
+  };
   return (
     <Navbar bg="danger" variant="dark" expand="lg">
       <Container>
@@ -17,12 +24,21 @@ const Menu = () => {
             <NavLink end to={"/registro"} className="nav-link">
               Registro
             </NavLink>
-            <NavLink end to={"/administrador"} className="nav-link">
-              Administrador
-            </NavLink>
-            <NavLink end to={"/login"} className="nav-link">
-              Login
-            </NavLink>
+            {/* aqui consulto si hay alguna propiedad */}
+            {usuarioActivo.email ? (
+              <>
+                <NavLink end to={"/administrador"} className="nav-link">
+                  Administrador
+                </NavLink>
+                <Button variant="dark" onClick={logout}>
+                  logaut
+                </Button>
+              </>
+            ) : (
+              <NavLink end to={"/login"} className="nav-link">
+                Login
+              </NavLink>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
