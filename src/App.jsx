@@ -12,13 +12,18 @@ import Login from "./components/views/Login";
 import Registro from "./components/views/Registro";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import EncapsularRutas from "./components/routs/EncapsularRutas";
+import RutasProtegidas from "./components/routs/RutasProtegidas";
 function App() {
   const usuarioEnLinea =
     JSON.parse(sessionStorage.getItem("usuarioLogeado")) || {};
   const [usuarioActivo, setUsuarioActivo] = useState(usuarioEnLinea);
   return (
     <BrowserRouter>
-      <Menu usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo}></Menu>
+      <Menu
+        usuarioActivo={usuarioActivo}
+        setUsuarioActivo={setUsuarioActivo}
+      ></Menu>
       <Routes>
         <Route exact path="/" element={<Inicio></Inicio>}></Route>
         <Route
@@ -32,20 +37,14 @@ function App() {
           path="/detalle"
           element={<DetalleProducto></DetalleProducto>}
         ></Route>
+
         <Route
-          exact
-          path="/administrador"
-          element={<Administrador></Administrador>}
-        ></Route>
-        <Route
-          exact
-          path="/administrador/crear"
-          element={<CrearProducto></CrearProducto>}
-        ></Route>
-        <Route
-          exact
-          path="/administrador/editar"
-          element={<EditarProducto></EditarProducto>}
+          path="/administrador/*"
+          element={
+            <EncapsularRutas>
+              <RutasProtegidas></RutasProtegidas>
+            </EncapsularRutas>
+          }
         ></Route>
         <Route path="*" element={<Error404></Error404>}></Route>
       </Routes>
