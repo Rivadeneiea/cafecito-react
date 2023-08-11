@@ -31,7 +31,7 @@ function App() {
           path="/login"
           element={<Login setUsuarioActivo={setUsuarioActivo}></Login>}
         ></Route>
-        <Route exact path="/regitro" element={<Registro></Registro>}></Route>
+        <Route exact path="/registro" element={<Registro></Registro>}></Route>
         <Route
           exact
           path="/detalle"
