@@ -37,7 +37,7 @@ export const login = async (usuario) => {
 // peticion PATCH, modifica el valor de un elemento
 // peticion DELETE, ELIMINAR un elemento
 
-const listarProductos = async () => {
+ export const listarProductos = async () => {
   try {
     const respuesta = await fetch(uriProducto);
     console.log(respuesta);

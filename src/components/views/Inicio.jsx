@@ -1,11 +1,21 @@
 import { Container, Row } from "react-bootstrap";
 import CardProducto from "./producto/CardProducto";
 import { useState, useEffect } from "react";
-
+import { listarProductos } from "../helpers/queries";
+import Swal from "sweetalert2";
 const Inicio = () => {
   const [productos, setProductos] = useState([]);
 
-  useEffect = (() => {}, []);
+  useEffect(() => {
+    listarProductos().then((respuestaProductos) => {
+      if (respuestaProductos) {
+        // actualizar el estado
+        setProductos(respuestaProductos);
+      } else {
+        Swal.fire("ocurrio un error", "intente mas tarde", "error");
+      }
+    });
+  }, []);
   return (
     <section className="mainSection">
       <img
@@ -16,10 +26,8 @@ const Inicio = () => {
       <Container>
         <h1 className="display-4">Nuestros Productos</h1>
         <hr />
+        {/* aqui tengo que mapear */}
         <Row>
-          <CardProducto></CardProducto>
-          <CardProducto></CardProducto>
-          <CardProducto></CardProducto>
           <CardProducto></CardProducto>
         </Row>
       </Container>
