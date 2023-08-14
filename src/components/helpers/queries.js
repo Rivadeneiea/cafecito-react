@@ -1,7 +1,9 @@
 // la funsion por parametro usuario con mail y password
+const uriUsuario = import.meta.env.VITE_API_USUARIO;
+
 export const login = async (usuario) => {
   try {
-    const promesa = await fetch("http://localhost:3004/usuarios");
+    const promesa = await fetch(uriUsuario);
     const listaUsuarios = await promesa.json();
     // pedir lista de usuarios a json server
     // buscar usuario que complete el formulario
