@@ -1,16 +1,48 @@
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { crearProducto, obtenerUnProducto } from "../../helpers/queries";
+import Swal from "sweetalert2";
 
 const CrearProducto = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset,
+    setValue,
+  } = useForm(() => {
+    obtenerUnProducto(id)
+      .then((respuesta) => {
+        if (respuesta) {
+          setValue("nombreProducto", respuesta.producto);
+        }
+      })
+      .catch((error) => {});
+  });
   // esta funcion pide logear al usuario
   const onSubmit = (producto) => {
     console.log("aca agrego logica");
     console.log(producto);
+
+    crearProducto(producto)
+      .then((respuesta) => {
+        if (respuesta.status === 201) {
+          Swal.fire(
+            "producto guardado",
+            "su producto se guardo correctamente",
+            "success"
+          );
+          reset();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire(
+          "hubo un error ",
+          "se produjo un error al cargar producto",
+          "error"
+        );
+      });
   };
 
   return (

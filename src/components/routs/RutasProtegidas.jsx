@@ -14,7 +14,7 @@ const RutasProtegidas = () => {
       ></Route>
       <Route
         exact
-        path="/editar"
+        path="/editar/: id"
         element={<EditarProducto></EditarProducto>}
       ></Route>
     </Routes>

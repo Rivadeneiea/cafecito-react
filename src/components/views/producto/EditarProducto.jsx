@@ -1,13 +1,18 @@
+import { useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 const EditarProducto = () => {
+  const { id } = useParams();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   // esta funcion pide logear al usuario
+
   const onSubmit = (producto) => {
     console.log("aca agrego logica");
     console.log(producto);

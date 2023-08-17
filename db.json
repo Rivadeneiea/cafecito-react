@@ -15,6 +15,27 @@
       "imagen": "https://images.pexels.com/photos/3020919/pexels-photo-3020919.jpeg",
       "descripcion": "un te de manzanilla",
       "id": 2
+    },
+    {
+      "producto": "te de manzanilla",
+      "descripcionProducto": "kaskks",
+      "precioProducto": "3",
+      "categoriaProducto": "salado",
+      "id": 3
+    },
+    {
+      "producto": "te de manzanilla",
+      "descripcionProducto": "lslls",
+      "precioProducto": "2",
+      "categoriaProducto": "salado",
+      "id": 4
+    },
+    {
+      "producto": "te de manzanilla",
+      "descripcionProducto": "lsls",
+      "precioProducto": "3",
+      "categoriaProducto": "salado",
+      "id": 5
     }
   ],
   "usuarios": [

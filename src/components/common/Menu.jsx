@@ -7,7 +7,7 @@ const Menu = ({ usuarioActivo, setUsuarioActivo }) => {
   const logout = () => {
     setUsuarioActivo({});
     sessionStorage.removeItem("usuarioLogeado");
-    navegacion("/");
+    navegacion("/registro");
   };
   return (
     <Navbar bg="danger" variant="dark" expand="lg">
