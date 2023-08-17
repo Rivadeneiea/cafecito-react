@@ -1,8 +1,22 @@
 import { Table, Button } from "react-bootstrap";
 import ItemProducto from "./producto/ItemProducto";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Administrador = () => {
+  const [productos, setProductos] = useState([]);
+  useEffect(() => {
+    // tengo que utilizar el .then
+    listarProducto().then((respuestaProductos) => {
+      if (respuestaProductos) {
+        // actualizar el estado
+        setProductos(respuestaProductos);
+      } else {
+        Swal.fire("Ocurrio un error", "Intente de nuevo", "error");
+      }
+    });
+  }, []);
+
   return (
     <section className="container mainSection">
       <div className="d-flex justify-content-between align-items-center mt-5">
@@ -24,7 +38,9 @@ const Administrador = () => {
           </tr>
         </thead>
         <tbody>
-          <ItemProducto></ItemProducto>
+          {productos.map((producto) => (
+            <ItemProducto {...producto} key={producto.id}></ItemProducto>
+          ))}
         </tbody>
       </Table>
     </section>

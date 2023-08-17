@@ -1,3 +1,5 @@
+import EditarProducto from "../views/producto/EditarProducto";
+
 // la funsion por parametro usuario con mail y password
 const uriUsuario = import.meta.env.VITE_API_USUARIO;
 const uriProducto = import.meta.env.VITE_API_PRODUCTOS;
@@ -37,7 +39,7 @@ export const login = async (usuario) => {
 // peticion PATCH, modifica el valor de un elemento
 // peticion DELETE, ELIMINAR un elemento
 
- export const listarProductos = async () => {
+export const listarProductos = async () => {
   try {
     const respuesta = await fetch(uriProducto);
     console.log(respuesta);
@@ -48,5 +50,46 @@ export const login = async (usuario) => {
   } catch (error) {
     console.log(error);
     return null;
+  }
+};
+export const crearProducto = async (producto) => {
+  try {
+    const respuesta = await fetch(uriProducto, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(producto),
+    });
+
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const obtenerUnProducto = async (id) => {
+  try {
+    const respuesta = await fetch(`${uriProducto}/${id})`);
+    const data = await respuesta.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const EditarProducto = async (id, productoEditado) => {
+  try {
+    const respuesta = await fetch(`${uriProducto}/${id})`);
+    method: "PUT";
+ headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(producto),
+      
+    return respuesta;
+    });
+
+  } catch (error) {
+    console.log(error);
   }
 };
