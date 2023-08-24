@@ -31,7 +31,7 @@ const Menu = ({ usuarioActivo, setUsuarioActivo }) => {
                   Administrador
                 </NavLink>
                 <Button variant="dark" onClick={logout}>
-                  logaut
+                  logout
                 </Button>
               </>
             ) : (

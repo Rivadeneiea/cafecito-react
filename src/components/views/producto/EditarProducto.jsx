@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { editarProducto, obtenerUnProducto } from "../../helpers/queries";
 
 const EditarProducto = () => {
   const { id } = useParams();
@@ -10,12 +11,47 @@ const EditarProducto = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
   // esta funcion pide logear al usuario
+  useEffect(() => {
+    obtenerUnProducto(id)
+      .then((respuesta) => {
+        if (respuesta) {
+          setValue("Producto", respuesta.producto);
+          setValue("descripcionProducto", respuesta.descripcionProducto);
+          setValue("precioProducto", respuesta.precioProducto);
+          setValue("imagenProducto", respuesta.imagenProducto);
+          setValue("categoriaProducto", respuesta.categoriaProducto);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const onSubmit = (producto) => {
     console.log("aca agrego logica");
     console.log(producto);
+
+    editarProducto(id, producto)
+      .then((respuesta) => {
+        if (respuesta.status === 200) {
+          Swal.fire(
+            "producto editado",
+            "su producto se edito correctamente",
+            "success"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire(
+          "hubo un error ",
+          "se produjo un error al editar producto",
+          "error"
+        );
+      });
   };
   return (
     <section className="container mainSection">

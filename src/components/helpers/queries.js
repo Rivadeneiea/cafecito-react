@@ -69,7 +69,7 @@ export const crearProducto = async (producto) => {
 };
 export const obtenerUnProducto = async (id) => {
   try {
-    const respuesta = await fetch(`${uriProducto}/${id})`);
+    const respuesta = await fetch(`${uriProducto}/${id}`);
     const data = await respuesta.json();
     return data;
   } catch (error) {
@@ -77,18 +77,17 @@ export const obtenerUnProducto = async (id) => {
   }
 };
 
-export const EditarProducto = async (id, productoEditado) => {
+export const editarProducto = async (id, productoEditado) => {
   try {
-    const respuesta = await fetch(`${uriProducto}/${id})`);
-    method: "PUT";
- headers: {
+    const respuesta = await fetch(`${uriProducto}/${id}`, {
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(producto),
-      
-    return respuesta;
+      body: JSON.stringify(productoEditado),
     });
 
+    return respuesta;
   } catch (error) {
     console.log(error);
   }
