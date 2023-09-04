@@ -92,3 +92,14 @@ export const editarProducto = async (id, productoEditado) => {
     console.log(error);
   }
 };
+
+export const borrarProducto = async (id) => {
+  try {
+    const respuesta = await fetch(`${uriProducto}/${id}`, {
+      method: "DELETE",
+    });
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+};
