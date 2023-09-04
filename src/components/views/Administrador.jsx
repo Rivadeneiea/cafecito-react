@@ -2,12 +2,13 @@ import { Table, Button } from "react-bootstrap";
 import ItemProducto from "./producto/ItemProducto";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { listarProductos } from "../helpers/queries";
 
 const Administrador = () => {
   const [productos, setProductos] = useState([]);
   useEffect(() => {
     // tengo que utilizar el .then
-    listarProducto().then((respuestaProductos) => {
+    listarProductos().then((respuestaProductos) => {
       if (respuestaProductos) {
         // actualizar el estado
         setProductos(respuestaProductos);
@@ -39,7 +40,11 @@ const Administrador = () => {
         </thead>
         <tbody>
           {productos.map((producto) => (
-            <ItemProducto {...producto} key={producto.id}></ItemProducto>
+            <ItemProducto
+              {...producto}
+              key={producto.id}
+              setProductos={setProductos}
+            ></ItemProducto>
           ))}
         </tbody>
       </Table>

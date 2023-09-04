@@ -1,25 +1,51 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { borrarProducto } from "../../helpers/queries";
+import { borrarProducto, listarProductos } from "../../helpers/queries";
+import Swal from "sweetalert2";
 
-const ItemProducto = ({ id, nombreProducto, precio, imagen, categoria }) => {
-  const borrarProducto = () => {
+const ItemProducto = ({
+  id,
+  nombreProducto,
+  precio,
+  imagen,
+  categoria,
+  setProductos,
+}) => {
+  const borrarProductoAdmin = () => {
     Swal.fire({
-      title: "Esta seguro de eliminar producto?",
-      text: "no se puede revertir este paso",
+      title: "¿Esta seguro de eliminar producto?",
+      text: "No se puede revertir este paso",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "error",
-      cancelButtonColor: "success",
-      confirmButtonText: "borrar",
-      cancelButtonText: "cancelar",
+      confirmButtonColor: "#3085D6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Borrar",
+      cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Eliminado!", "El juego fue eliminado con exito", "success");
-        borrarJuego(juego.id);
+        borrarProducto(id).then((respuesta) => {
+          if (respuesta.status === 200) {
+            listarProductos().then((respuesta) => {
+              console.log(respuesta);
+              setProductos(respuesta);
+            });
+            Swal.fire(
+              "Producto eliminado",
+              "El producto fue correctamente borrado del catalogo",
+              "success"
+            );
+          } else {
+            Swal.fire(
+              "Se produjo un error",
+              "Intente realizar esta operación mas tarde",
+              "error"
+            );
+          }
+        });
       }
     });
   };
+
   return (
     <tr>
       <td>{id}</td>
@@ -31,7 +57,9 @@ const ItemProducto = ({ id, nombreProducto, precio, imagen, categoria }) => {
         <Link className="btn btn-warning" to={`/administrador/editar/${id}`}>
           Editar
         </Link>
-        <Button variant="danger" onClick={borrarProducto}></Button>
+        <Button variant="danger" onClick={borrarProductoAdmin}>
+          Eliminar
+        </Button>
       </td>
     </tr>
   );
