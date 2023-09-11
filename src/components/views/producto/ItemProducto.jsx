@@ -4,7 +4,7 @@ import { borrarProducto, listarProductos } from "../../helpers/queries";
 import Swal from "sweetalert2";
 
 const ItemProducto = ({
-  id,
+  _id,
   nombreProducto,
   precio,
   imagen,
@@ -48,13 +48,13 @@ const ItemProducto = ({
 
   return (
     <tr>
-      <td>{id}</td>
+      <td>{_id}</td>
       <td>{nombreProducto}</td>
       <td>$ {precio}</td>
       <td>{imagen}</td>
       <td>{categoria}</td>
       <td>
-        <Link className="btn btn-warning" to={`/administrador/editar/${id}`}>
+        <Link className="btn btn-warning" to={`/administrador/editar/${_id}`}>
           Editar
         </Link>
         <Button variant="danger" onClick={borrarProductoAdmin}>
