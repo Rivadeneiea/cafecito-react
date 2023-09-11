@@ -17,7 +17,7 @@ const Login = ({ setUsuarioActivo }) => {
     console.log(usuario);
     login(usuario).then((respuesta) => {
       console.log(respuesta);
-      if (respuesta) {
+      if (respuesta.status === 200) {
         Swal.fire(
           "bienvenido " + respuesta.nombreUsuario,
 

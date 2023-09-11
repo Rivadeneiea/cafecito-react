@@ -29,7 +29,7 @@ const Inicio = () => {
         {/* aqui tengo que mapear */}
         <Row>
           {productos.map((producto) => (
-            <CardProducto key={producto.id} producto={producto}></CardProducto>
+            <CardProducto key={producto._id} producto={producto}></CardProducto>
           ))}
         </Row>
       </Container>

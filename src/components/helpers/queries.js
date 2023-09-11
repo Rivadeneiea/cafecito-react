@@ -4,32 +4,55 @@ import EditarProducto from "../views/producto/EditarProducto";
 const uriUsuario = import.meta.env.VITE_API_USUARIO;
 const uriProducto = import.meta.env.VITE_API_PRODUCTOS;
 
+// export const login = async (usuario) => {
+//   try {
+//     const promesa = await fetch(uriUsuario);
+//     const listaUsuarios = await promesa.json();
+//     // pedir lista de usuarios a json server
+//     // buscar usuario que complete el formulario
+//     const usuarioBuscado = listaUsuarios.find(
+//       (itemUsuario) => itemUsuario.email === usuario.email
+//     );
+//     // preguntar si encontro el usuario
+//     if (usuarioBuscado) {
+//       // si encontre el usuario y el password es correcto
+//       if (usuarioBuscado.password === usuario.password) {
+//         console.log("todo esta perfecto");
+//         return usuarioBuscado;
+//       } else {
+//         console.log("el passward es incorrecto");
+//         return null;
+//       }
+//     } else {
+//       // si lo encuentra es correcto caso contario salio todod mal
+//       console.log("el mail es incorrecto");
+//       return null;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 export const login = async (usuario) => {
   try {
-    const promesa = await fetch(uriUsuario);
-    const listaUsuarios = await promesa.json();
-    // pedir lista de usuarios a json server
-    // buscar usuario que complete el formulario
-    const usuarioBuscado = listaUsuarios.find(
-      (itemUsuario) => itemUsuario.email === usuario.email
-    );
-    // preguntar si encontro el usuario
-    if (usuarioBuscado) {
-      // si encontre el usuario y el password es correcto
-      if (usuarioBuscado.password === usuario.password) {
-        console.log("todo esta perfecto");
-        return usuarioBuscado;
-      } else {
-        console.log("el passward es incorrecto");
-        return null;
-      }
-    } else {
-      // si lo encuentra es correcto caso contario salio todod mal
-      console.log("el mail es incorrecto");
-      return null;
-    }
+    console.log(usuario);
+    const respuesta = await fetch(URL_USER, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuario),
+    });
+    const datos = await respuesta.json();
+    return {
+      status: respuesta.status,
+      mensaje: datos.mensaje,
+      usuario: datos.nombre,
+      // token: datos.token,
+      uid: datos.uid,
+    };
   } catch (error) {
-    console.log(error);
+    console.log("errores en el login");
+    return;
   }
 };
 // solicitudes o peticiones a la api

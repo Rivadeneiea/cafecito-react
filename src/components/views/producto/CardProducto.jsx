@@ -13,6 +13,7 @@ const CardProducto = ({ producto }) => {
           <Card.Title>{producto.nombreProducto}</Card.Title>
           <Card.Text>${producto.precio}</Card.Text>
           <Button variant="primary">{producto.descripcion}</Button>
+          {/* agregar link */}
         </Card.Body>
       </Card>
     </Col>
